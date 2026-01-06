@@ -1,0 +1,174 @@
+/* 基本設定 */
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 防止側邊選單滑出時出現橫向捲軸 */
+}
+
+/* --- 頂部導覽列 (Top Bar) --- */
+.top-bar {
+    display: flex;
+    justify-content: space-between; /* 左右分開 */
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+    height: 50px;
+    position: relative;
+    z-index: 20; /* 確保在內容之上 */
+}
+
+/* 漢堡按鈕圖示 */
+.menu-btn {
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 右上角登入按鈕 (要有圓角) */
+.top-login-btn {
+    padding: 5px 20px;
+    background-color: #ffe4e1; /* 淡粉色 */
+    border: 1px solid #ccc;
+    border-radius: 15px; /* 題目要求：圓角屬性 */
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* --- 側邊選單 (Sidebar) --- */
+.sidebar {
+    position: fixed;
+    top: 50px; /* 接在 Top Bar 下方 */
+    left: -200px; /* 預設隱藏在螢幕左邊外面 */
+    width: 200px;
+    height: calc(100vh - 50px);
+    background-color: #d87093; /* 深粉色 (參考圖片) */
+    color: white;
+    transition: left 0.3s ease; /* 題目要求：transition 動態效果 */
+    z-index: 10;
+}
+
+/* 當加上 active class 時，選單滑出來 */
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    background-color: #db7093; /* 每一個選項的背景 */
+}
+
+.sidebar li:nth-child(even) {
+    background-color: #e68fac; /* 讓顏色有點層次，像圖片那樣 */
+}
+
+/* --- 主要內容區 (Main Content) --- */
+.main-content {
+    height: calc(100vh - 50px);
+    background-color: #ffc0cb; /* 粉紅色背景 */
+    width: 100%;
+}
+
+/* --- 登入彈出視窗 (Modal) --- */
+.modal-overlay {
+    display: none; /* 預設隱藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 192, 203, 0.5); /* 半透明粉紅遮罩 */
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* 最上層 */
+}
+
+.modal-content {
+    background: #ffe4e1; /* 視窗背景色 */
+    padding: 30px;
+    width: 320px;
+    border-radius: 10px; /* 視窗圓角 */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+/* 標題 */
+.modal-content h3 {
+    text-align: center;
+    margin-top: 0;
+    color: #555;
+}
+
+/* 關閉按鈕 (X) */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+/* 表單樣式 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #555; /* 底線風格 */
+    background: transparent;
+    outline: none;
+}
+
+/* 登入按鈕 (視窗內) */
+.modal-login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #55444b; /* 深色按鈕 */
+    color: white;
+    border: none;
+    border-radius: 20px; /* 題目要求：圓角 */
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 紅色文字樣式 (題目要求) */
+.red-text {
+    color: red;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.links {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.bottom-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #aaa;
+}

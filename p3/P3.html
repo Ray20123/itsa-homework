@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>題目三：響應式側邊選單與登入</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="menu-btn" onclick="toggleSidebar()">
+            &#9776; </div>
+        
+        <button class="top-login-btn" onclick="openLogin()">登入</button>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <ul>
+            <li>選單一</li>
+            <li>選單二</li>
+            <li>選單三</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        </div>
+
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeLogin()">&times;</span>
+            
+            <h3>登入帳號</h3>
+            
+            <form onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label>電子郵件/電話號碼</label>
+                    <input type="text" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>密碼</label>
+                    <input type="password" required>
+                </div>
+
+                <div class="links">
+                    <span class="red-text">忘記密碼？</span>
+                </div>
+
+                <button type="submit" class="modal-login-btn">登入</button>
+                
+                <div class="links bottom-link">
+                    沒有帳號？ <span class="red-text">註冊</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 1. 切換側邊選單 (開/關)
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            // 切換 class 'active' 來觸發 CSS 的動畫
+            sidebar.classList.toggle('active');
+        }
+
+        // 2. 打開登入視窗
+        function openLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        // 3. 關閉登入視窗
+        function closeLogin() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        // 4. 防止表單真的送出 (測試用)
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('登入送出！');
+            closeLogin();
+        }
+    </script>
+
+</body>
+</html>

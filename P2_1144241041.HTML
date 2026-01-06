@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>題目二：AI聊天對話框</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #e9eff1; display: flex; justify-content: center; height: 100vh; margin: 0; }
+        .chat-container { width: 400px; height: 600px; background: white; margin-top: 20px; border-radius: 10px; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; }
+        .chat-header { background: #54a0ff; color: white; padding: 15px; text-align: center; font-weight: bold; }
+        .chat-box { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; }
+        .message { margin-bottom: 15px; max-width: 80%; padding: 10px 15px; border-radius: 20px; font-size: 14px; line-height: 1.4; }
+        .user-msg { background-color: #54a0ff; color: white; align-self: flex-end; margin-left: auto; border-bottom-right-radius: 2px; }
+        .ai-msg { background-color: #e0e0e0; color: #333; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .input-area { padding: 15px; border-top: 1px solid #ddd; display: flex; background: white; }
+        #userInput { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 20px; outline: none; }
+        #sendBtn { margin-left: 10px; padding: 10px 20px; background: #54a0ff; color: white; border: none; border-radius: 20px; cursor: pointer; }
+        #sendBtn:hover { background: #2e86de; }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">AI 助理 (固定回應模式)</div>
+    <div class="chat-box" id="chatBox">
+        <div class="message ai-msg">你好！我是 AI 助理。請問有什麼我可以幫你的嗎？(試試輸入：你好、天氣、再見)</div>
+    </div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="輸入訊息..." onkeypress="handleEnter(event)">
+        <button id="sendBtn" onclick="sendMessage()">發送</button>
+    </div>
+</div>
+
+<script>
+    function handleEnter(e) {
+        if (e.key === 'Enter') sendMessage();
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('userInput');
+        const text = input.value.trim();
+        if (!text) return;
+
+        addMessage(text, 'user-msg');
+        input.value = '';
+
+        // 模擬 AI 回應 (延遲 0.5 秒)
+        setTimeout(() => {
+            const aiResponse = getFixedResponse(text);
+            addMessage(aiResponse, 'ai-msg');
+        }, 500);
+    }
+
+    function addMessage(text, className) {
+        const chatBox = document.getElementById('chatBox');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${className}`;
+        msgDiv.textContent = text;
+        chatBox.appendChild(msgDiv);
+        chatBox.scrollTop = chatBox.scrollHeight; // 自動捲動到底部
+    }
+
+    // 固定的問答集
+    function getFixedResponse(input) {
+        input = input.toLowerCase();
+        if (input.includes('你好') || input.includes('hello')) return '你好！很高興見到你。';
+        if (input.includes('天氣')) return '雖然我無法連網，但今天感覺是個寫程式的好天氣！';
+        if (input.includes('再見') || input.includes('bye')) return '再見！祝你有美好的一天。';
+        return '這是一個很有趣的問題，但我只能回答預設的內容喔！';
+    }
+</script>
+
+</body>
+</html>
