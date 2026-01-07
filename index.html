@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一個網頁</title>
+    <style>
+        /* CSS 部分：設定背景與字體 */
+        body {
+            background-color: #e0f7fa; /* 淡藍色背景 */
+            font-family: sans-serif;   /* 無襯線字體 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>我的第一個網頁</h1>
+    <p>這是我的第一個網頁內容。</p>
+
+    <button onclick="showAlert()">顯示歡迎訊息</button>
+    <button onclick="changeBackgroundColor()">改變背景顏色</button>
+
+    <script>
+        // JavaScript 部分
+
+        // 功能 1：顯示提示框
+        function showAlert() {
+            alert("歡迎來到我的網頁！");
+        }
+
+        // 功能 2：點擊按鈕改變背景顏色 (加強版功能)
+        function changeBackgroundColor() {
+            // 隨機生成一個顏色，或者在兩種顏色間切換
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            document.body.style.backgroundColor = randomColor;
+        }
+    </script>
+</body>
+</html>

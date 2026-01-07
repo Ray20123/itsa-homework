@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>TTS 文字轉語音產生器</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+        textarea { width: 100%; height: 100px; margin-bottom: 10px; padding: 10px; }
+        .controls { margin-bottom: 20px; background: #f4f4f4; padding: 15px; border-radius: 8px; }
+        label { display: inline-block; width: 60px; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;}
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+    <h1>TTS 文字轉語音工具</h1>
+    
+    <div class="controls">
+        <p>參數調整：</p>
+        <div>
+            <label for="rate">語速:</label>
+            <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
+            <span id="rate-value">1</span>
+        </div>
+        <div>
+            <label for="pitch">語調:</label>
+            <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
+            <span id="pitch-value">1</span>
+        </div>
+    </div>
+
+    <textarea id="text-input" placeholder="請在此輸入想唸出的文字...">你好，這是一個測試 TTS 功能的網頁。</textarea>
+    
+    <button onclick="speakText()">朗讀文字</button>
+
+    <script>
+        // 更新滑桿數值顯示
+        const rateInput = document.getElementById('rate');
+        const pitchInput = document.getElementById('pitch');
+        
+        rateInput.oninput = () => document.getElementById('rate-value').textContent = rateInput.value;
+        pitchInput.oninput = () => document.getElementById('pitch-value').textContent = pitchInput.value;
+
+        function speakText() {
+            const text = document.getElementById('text-input').value;
+            
+            if (text !== "") {
+                // 建立 SpeechSynthesisUtterance 物件
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // 設定參數
+                utterance.rate = rateInput.value;  // 語速
+                utterance.pitch = pitchInput.value; // 語調
+                utterance.lang = 'zh-TW';          // 設定為中文
+
+                // 播放
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("請先輸入文字！");
+            }
+        }
+    </script>
+</body>
+</html>
