@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的 AI 繪本故事</title>
+    <style>
+        body {
+            background-color: #fdf6e3; /* 像紙張的米黃色背景 */
+            font-family: "Microsoft JhengHei", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #5d4037;
+        }
+        .book-container {
+            width: 800px; /* 依照圖片要求設定寬度 */
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #page-number {
+            font-size: 18px;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>小松鼠與貓頭鷹的星空派對</h1>
+
+    <div class="book-container">
+        <img id="story-image" src="page0.jpg" alt="故事圖片">
+        
+        <p id="story-text">這是第 1 頁</p>
+
+        <div class="controls">
+            <button id="prev-btn" onclick="changePage(-1)">上一頁</button>
+            <span id="page-number">第 1 頁 / 共 10 頁</span>
+            <button id="next-btn" onclick="changePage(1)">下一頁</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const totalPages = 10; // 0 到 9，共 10 頁
+        
+        // 這裡可以放每一頁對應的故事文字
+        const storyTexts = [
+            "1. 小松鼠皮皮和貓頭鷹歐歐住在同一座森林裡，一個愛白天，一個愛晚上。",
+            "2. 森林要舉辦星空派對，大家都要幫忙準備。",
+            "3. 皮皮怕黑，歐歐白天想睡覺，兩人都很煩惱。",
+            "4. 皮皮提議：我們來交換工作吧！",
+            "5. 歐歐覺得這是個好主意，於是他們決定合作。",
+            "6. 白天，皮皮手腳俐落地收集了好多堅果。",
+            "7. 晚上，歐歐張大眼睛，把彩燈掛得高高的。",
+            "8. 派對開始了！燈光美、氣氛佳，大家都來了。",
+            "9. 他們互相感謝對方的幫忙。",
+            "10. 只要互相合作，就能完成困難的任務！"
+        ];
+
+        function changePage(direction) {
+            currentPage += direction;
+
+            // 確保頁數不超出範圍
+            if (currentPage < 0) currentPage = 0;
+            if (currentPage >= totalPages) currentPage = totalPages - 1;
+
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            // 更新圖片：根據檔名 page0.jpg ~ page9.jpg
+            document.getElementById('story-image').src = `page` + currentPage + `.jpg`;
+            
+            // 更新文字
+            document.getElementById('story-text').innerText = storyTexts[currentPage];
+
+            // 更新頁碼顯示
+            document.getElementById('page-number').innerText = `第 ${currentPage + 1} 頁 / 共 ${totalPages} 頁`;
+
+            // 控制按鈕狀態
+            document.getElementById('prev-btn').disabled = (currentPage === 0);
+            document.getElementById('next-btn').disabled = (currentPage === totalPages - 1);
+        }
+
+        // 初始化
+        updateDisplay();
+    </script>
+
+</body>
+</html>
